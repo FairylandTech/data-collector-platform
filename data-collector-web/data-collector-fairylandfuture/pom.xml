@@ -18,7 +18,9 @@
 
         <!-- dependence version -->
         <lombok.version>1.18.42</lombok.version>
-        <jackson.version>2.19.4</jackson.version>
+        <jackson.annotations.version>2.19.4</jackson.annotations.version>
+        <slf4j.api.version>2.0.17</slf4j.api.version>
+        <logback.classic.version>1.5.21</logback.classic.version>
     </properties>
 
     <dependencies>
@@ -33,7 +35,21 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
+            <version>${jackson.annotations.version}</version>
+        </dependency>
+        
+        <!-- Slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+        
+        <!-- Logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.classic.version}</version>
         </dependency>
     </dependencies>
 
