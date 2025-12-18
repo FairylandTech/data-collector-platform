@@ -27,7 +27,6 @@ public class TestController {
     
     @GetMapping("/hello")
     public Response<Void> hello() {
-        log.info("GenderEnum MALE: {}", GenderEnum.MALE.name());
         return Response.success();
     }
     
