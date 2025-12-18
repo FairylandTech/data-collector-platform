@@ -3,11 +3,11 @@
  * @author: Lionel Johnson
  * @contact: https://fairy.host
  * @organization: https://github.com/FairylandFuture
- * @datetime: 2025-12-18 12:58:27 UTC+08:00
+ * @datetime: 2025-12-18 13:01:28 UTC+08:00
  ****************************************************/
 package host.fairy.model.user;
 
-import host.fairy.entity.model.ModelBase;
+import host.fairy.fairylandfuture.model.ModelBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -19,11 +19,9 @@ import lombok.ToString;
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = true)
-public class GroupModel extends ModelBase {
+public class UserRoleModel extends ModelBase {
     
-    private String name;
+    private Long userId;
     
-    private String description;
-    
-    private Long parentId;
+    private Long roleId;
 }

@@ -7,8 +7,7 @@
  ****************************************************/
 package host.fairy.controller;
 
-import host.fairy.entity.Response;
-import host.fairy.enums.GenderEnum;
+import host.fairy.fairylandfuture.http.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

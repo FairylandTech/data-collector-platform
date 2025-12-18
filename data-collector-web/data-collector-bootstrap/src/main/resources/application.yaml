@@ -3,3 +3,7 @@ spring:
     active: dev
 server:
   port: 8080
+auth:
+  jwt:
+    secret-key: 51&c&dVU3Yg8poq5jVA5A7wJ1wHsGdnXpb9bEcz9f#2ew^SZFD3I&qJrM#9!KDag
+    expiration-millis: 7200

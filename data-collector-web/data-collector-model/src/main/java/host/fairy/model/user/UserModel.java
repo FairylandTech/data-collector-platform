@@ -9,8 +9,8 @@ package host.fairy.model.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import host.fairy.entity.model.ModelBase;
-import host.fairy.enums.GenderEnum;
+import host.fairy.fairylandfuture.enums.GenderEnum;
+import host.fairy.fairylandfuture.model.ModelBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

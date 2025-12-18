@@ -8,9 +8,10 @@
 package host.fairy.service.impl;
 
 import host.fairy.entity.dto.UserLoginDTO;
-import host.fairy.exception.AuthenticationException;
+import host.fairy.fairylandfuture.exception.auth.AuthenticationException;
 import host.fairy.mapper.UserMapper;
 import host.fairy.model.user.UserModel;
+import host.fairy.service.JWTAuthService;
 import host.fairy.service.UserLoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,23 +26,26 @@ public class UserLoginServiceImpl implements UserLoginService {
     
     private final UserMapper userMapper;
     
-    public UserLoginServiceImpl(UserMapper userMapper) {
+    private final JWTAuthService jwtAuthService;
+    
+    public UserLoginServiceImpl(UserMapper userMapper, JWTAuthService jwtAuthService) {
         this.userMapper = userMapper;
+        this.jwtAuthService = jwtAuthService;
     }
     
     @Override
     public String login(UserLoginDTO userLoginDTO) {
+        log.info("用户登录，用户名：{}", userLoginDTO.getUsername());
         // TOOD: 校验验证码
         
         // 校验用户名和密码
         UserModel user = userMapper.findByUsername(userLoginDTO.getUsername());
-        
+        log.info("查询到的用户信息：{}", user);
         if (user == null || !user.getPassword().equals(userLoginDTO.getPassword())) {
             log.error("用户登录失败，用户名或密码错误，用户名：{}", userLoginDTO.getUsername());
             throw new AuthenticationException("用户名或密码错误");
         }
         
-        
-        return "user";
+        return jwtAuthService.generateToken(user);
     }
 }

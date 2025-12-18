@@ -27,8 +27,8 @@ public class UserLoginDTO {
     
     @NotBlank(message = "密码不能为空")
     @Size(min = 6, max = 20, message = "密码长度必须在6-20个字符之间")
-    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).*$",
-            message = "密码必须包含至少一个字母和一个数字")
+//    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).*$",
+//            message = "密码必须包含至少一个字母和一个数字")
     private String password;
     
     @NotBlank(message = "验证码不能为空")
