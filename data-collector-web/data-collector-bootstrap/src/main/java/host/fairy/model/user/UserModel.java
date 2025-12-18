@@ -7,6 +7,7 @@
  ****************************************************/
 package host.fairy.model.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import host.fairy.entity.model.ModelBase;
 import host.fairy.enums.GenderEnum;
@@ -15,7 +16,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author Lionel Johnson
@@ -33,6 +33,7 @@ public class UserModel extends ModelBase {
     
     private String name;
     
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime birthday;
     
     private GenderEnum gender;
