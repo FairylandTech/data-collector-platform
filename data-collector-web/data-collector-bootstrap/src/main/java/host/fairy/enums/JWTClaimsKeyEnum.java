@@ -3,16 +3,15 @@
  * @author: Lionel Johnson
  * @contact: https://fairy.host
  * @organization: https://github.com/FairylandFuture
- * @datetime: 2025-12-18 23:49:48 UTC+08:00
+ * @datetime: 2025-12-19 03:19:50 UTC+08:00
  ****************************************************/
-package host.fairy.exception;
+package host.fairy.enums;
 
 /**
  * @author Lionel Johnson
  * @version 1.0
  */
-public class ExceptionBase extends RuntimeException {
-    public ExceptionBase(String message) {
-        super(message);
-    }
+public enum JWTClaimsKeyEnum {
+    USER_ID,
+    USERNAME,
 }

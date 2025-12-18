@@ -7,21 +7,22 @@
  ****************************************************/
 package host.fairy.controller;
 
-import host.fairy.entity.Response;
 import host.fairy.entity.dto.UserLoginDTO;
+import host.fairy.fairylandfuture.enums.http.ResponseStatusEnum;
+import host.fairy.fairylandfuture.http.Response;
 import host.fairy.service.UserLoginService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Lionel Johnson
  * @version 1.0
  */
+@Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class UserLoginController {
     
     private final UserLoginService userLoginService;
@@ -30,10 +31,17 @@ public class UserLoginController {
         this.userLoginService = userLoginService;
     }
     
-    @GetMapping("/login")
-    public Response<String> login(@Valid @RequestBody UserLoginDTO userLoginDTO) {
+    @PostMapping("/login")
+    public Response<String> login(@Valid @RequestBody UserLoginDTO userLoginDTO, HttpServletResponse response) {
+        log.info("进入 UserLoginController.login, 用户名: {}", userLoginDTO.getUsername());
         String token = this.userLoginService.login(userLoginDTO);
+        if (token == null) {
+            // TODO: 优化
+            return Response.success(ResponseStatusEnum.UNAUTHORIZED.getCode(), "登录失败", null);
+        }
         
+        response.setHeader("Authorization", token);
+        response.setHeader("Access-Control-Expose-Headers", "Authorization");
         return Response.success("登录成功");
     }
 }

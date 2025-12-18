@@ -3,16 +3,19 @@
  * @author: Lionel Johnson
  * @contact: https://fairy.host
  * @organization: https://github.com/FairylandFuture
- * @datetime: 2025-12-18 23:53:01 UTC+08:00
+ * @datetime: 2025-12-19 03:07:19 UTC+08:00
  ****************************************************/
-package host.fairy.exception;
+package host.fairy.service;
+
+import host.fairy.model.user.UserModel;
+import io.jsonwebtoken.Claims;
 
 /**
  * @author Lionel Johnson
  * @version 1.0
  */
-public class AuthenticationException extends ExceptionBase {
-    public AuthenticationException(String message) {
-        super(message);
-    }
+public interface JWTAuthService {
+    String generateToken(UserModel userModel);
+    
+    Claims parseToken(String token);
 }
