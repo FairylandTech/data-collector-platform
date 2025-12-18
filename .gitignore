@@ -1,1 +1,6 @@
 .idea
+
+application-dev.yaml
+application-test.yaml
+application-prod.yaml
+application.properties
