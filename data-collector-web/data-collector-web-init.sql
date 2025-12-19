@@ -6,6 +6,7 @@
  * @datetime: 2025-12-18 19:02:29 UTC+08:00
  *****************************************************/
 
+drop database if exists data_collector_web;
 create database if not exists data_collector_web charset utf8mb4 collate utf8mb4_general_ci;
 use data_collector_web;
 
@@ -13,15 +14,16 @@ use data_collector_web;
 create table if not exists tb_user
 (
     id         integer primary key auto_increment,
-    username   varchar(255) unique                                            not null,
-    password   varchar(512)                                                   not null,
+    username   varchar(255) unique                                                                      not null,
+    password   varchar(512)                                                                             not null,
     name       varchar(32),
-    birthday   datetime,
+    gender     enum ('female', 'male', 'unknown') default 'unknown'                                     not null,
+    birthday   date,
     phone      varchar(11),
     email      varchar(128),
-    created_at datetime default current_timestamp                             not null,
-    updated_at datetime default current_timestamp on update current_timestamp not null,
-    deleted    boolean  default false
+    created_at datetime                           default current_timestamp                             not null,
+    updated_at datetime                           default current_timestamp on update current_timestamp not null,
+    deleted    boolean                            default false
 );
 
 -- 用户组

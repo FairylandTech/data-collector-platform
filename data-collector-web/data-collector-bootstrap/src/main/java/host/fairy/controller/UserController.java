@@ -9,18 +9,14 @@ package host.fairy.controller;
 
 import host.fairy.entity.dto.user.UserCreateDTO;
 import host.fairy.entity.dto.user.UserLoginDTO;
+import host.fairy.entity.vo.user.UserInfoVO;
 import host.fairy.entity.vo.user.UserLoginVO;
-import host.fairy.fairylandfuture.http.Response;
+import host.fairy.fairylandfuture.common.web.response.Response;
 import host.fairy.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDate;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Lionel Johnson
@@ -38,7 +34,7 @@ public class UserController {
     }
     
     @PostMapping("/login")
-    public Response<UserLoginVO> login(@Valid @RequestBody UserLoginDTO userLoginDTO, HttpServletResponse response) {
+    public Response<UserLoginVO> login(@Valid UserLoginDTO userLoginDTO, HttpServletResponse response) {
         UserLoginVO result = this.userService.login(userLoginDTO);
         response.setHeader("Authorization", result.getToken());
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
@@ -46,8 +42,15 @@ public class UserController {
     }
     
     @PostMapping()
-    public Response<?> createUser(@Valid @RequestBody UserCreateDTO userCreateDTO){
+    public Response<?> createUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
         log.info("创建用户：{}, 年龄: {}", userCreateDTO, userCreateDTO.getAge());
         return Response.success();
+    }
+    
+    @GetMapping("/{userId}")
+    public Response<UserInfoVO> getProfile(@PathVariable int userId) {
+        log.debug("获取用户信息，用户ID：{}", userId);
+        return Response.success(this.userService.getUserById(userId));
+    
     }
 }
