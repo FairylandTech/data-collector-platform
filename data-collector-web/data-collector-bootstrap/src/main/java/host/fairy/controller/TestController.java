@@ -7,13 +7,11 @@
  ****************************************************/
 package host.fairy.controller;
 
-import host.fairy.fairylandfuture.http.Response;
+import host.fairy.fairylandfuture.common.web.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-;
 
 /**
  * @author Lionel Johnson

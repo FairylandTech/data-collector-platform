@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="host.fairy.mapper.UserMapper">
+<mapper namespace="host.fairy.mapper.user.UserMapper">
     <!--@Table tb_user-->
 
     <resultMap id="BaseResultMap" type="host.fairy.model.user.UserModel" autoMapping="true">
@@ -8,6 +8,7 @@
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="VARCHAR"/>
         <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
@@ -17,18 +18,23 @@
     </resultMap>
 
     <sql id="FindAllFields">
-        select id, username, password, name, birthday, phone, email, created_at, updated_at, deleted
+        select id, username, password, name, gender, birthday, phone, email, created_at, updated_at, deleted
         from tb_user
     </sql>
     
-    <select id="findByUsername" resultMap="BaseResultMap">
+    <select id="selectUserByUsername" resultMap="BaseResultMap">
         <include refid="FindAllFields"/>
         where username = #{username};
     </select>
     
     <insert id="insert">
-        insert into tb_user (username, password, name, birthday, phone, email)
-        values (#{username}, #{password}, #{name}, #{birthday}, #{phone}, #{email});
+        insert into tb_user (username, password, name, gender, birthday, phone, email)
+        values (#{username}, #{password}, #{name}, #{gender}, #{birthday}, #{phone}, #{email});
     </insert>
+    
+    <select id="selectUserById" resultMap="BaseResultMap">
+        <include refid="FindAllFields"/>
+        where id = #{id};
+    </select>
 
 </mapper>

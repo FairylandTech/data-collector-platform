@@ -3,21 +3,19 @@
  * @author: Lionel Johnson
  * @contact: https://fairy.host
  * @organization: https://github.com/FairylandFuture
- * @datetime: 2025-12-18 22:51:10 UTC+08:00
+ * @datetime: 2025-12-19 21:56:02 UTC+08:00
  ****************************************************/
-package host.fairy.mapper;
+package host.fairy.mapper.user;
 
-import host.fairy.model.user.UserModel;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author Lionel Johnson
  * @version 1.0
  */
 @Mapper
-public interface UserMapper {
-    
-    UserModel findByUsername(String username);
-    
-    void insert(UserModel user);
+public interface UserRoleMapper {
+    List<Long> selectRoleIdsByUserId(long userId);
 }

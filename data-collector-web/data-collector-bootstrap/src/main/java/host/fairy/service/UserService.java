@@ -9,6 +9,7 @@ package host.fairy.service;
 
 import host.fairy.entity.dto.user.UserCreateDTO;
 import host.fairy.entity.dto.user.UserLoginDTO;
+import host.fairy.entity.vo.user.UserInfoVO;
 import host.fairy.entity.vo.user.UserLoginVO;
 
 /**
@@ -19,4 +20,6 @@ public interface UserService {
     UserLoginVO login(UserLoginDTO userLoginDTO);
     
     void createUser(UserCreateDTO userCreateDTO);
+    
+    UserInfoVO getUserById(long userId);
 }

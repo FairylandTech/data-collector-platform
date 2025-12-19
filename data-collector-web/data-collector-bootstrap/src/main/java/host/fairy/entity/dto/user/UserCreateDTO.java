@@ -28,6 +28,8 @@ public class UserCreateDTO {
     
     private String name;
     
+    private String gender;
+    
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate birthday;
     
@@ -56,6 +58,7 @@ public class UserCreateDTO {
         model.setUsername(this.username);
         model.setPassword(this.password);
         model.setName(this.name);
+        model.setGender(this.gender);
         model.setBirthday(this.birthday);
         model.setPhone(this.phone);
         model.setEmail(this.email);
