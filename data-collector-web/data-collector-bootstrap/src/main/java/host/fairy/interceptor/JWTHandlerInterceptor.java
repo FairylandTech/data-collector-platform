@@ -48,8 +48,8 @@ public class JWTHandlerInterceptor implements HandlerInterceptor {
         
         try {
             Claims claims = this.authService.parseToken(token);
-            Integer userId = claims.get(JWTClaimsKeyEnum.USER_ID.name(), Integer.class);
-            String username = claims.get(JWTClaimsKeyEnum.USERNAME.name(), String.class);
+            Integer userId = claims.get(JWTClaimsKeyEnum.USER_ID.getName(), Integer.class);
+            String username = claims.get(JWTClaimsKeyEnum.USERNAME.getName(), String.class);
             request.setAttribute("userId", userId);
             request.setAttribute("username", username);
             return true;

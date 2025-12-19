@@ -34,22 +34,13 @@ public class JWTAuthServiceImpl implements JWTAuthService {
     
     @Override
     public String generateToken(UserModel userModel) {
-//        HashMap<String, String> claims = new HashMap<>() {
-//            {
-//                put(JWTClaimsKeyEnum.USER_ID.name(), String.valueOf(userModel.getId()));
-//                put(JWTClaimsKeyEnum.USERNAME.name(), userModel.getUsername());
-//            }
-//        };
-        HashMap<String, String> claims = new HashMap<>() {
+        HashMap<String, Object> claims = new HashMap<>() {
             {
-                put(JWTClaimsKeyEnum.USER_ID.name(), "1");
-                put(JWTClaimsKeyEnum.USERNAME.name(), "admin");
+                put(JWTClaimsKeyEnum.USER_ID.getName(), userModel.getId());
+                put(JWTClaimsKeyEnum.USERNAME.getName(), userModel.getUsername());
             }
         };
-        log.info("claims = {}", claims.toString());
-        String token = JWTUtils.generateToken(this.jwtProperties.getSecretKey(), this.jwtProperties.getExpirationMillis(), claims);
-        log.info("生成的 token = {}", token);
-        return token;
+        return JWTUtils.generateToken(this.jwtProperties.getSecretKey(), this.jwtProperties.getExpirationMillis(), claims);
     }
     
     @Override

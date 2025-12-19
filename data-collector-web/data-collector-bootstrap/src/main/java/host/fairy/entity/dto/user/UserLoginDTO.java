@@ -5,7 +5,7 @@
  * @organization: https://github.com/FairylandFuture
  * @datetime: 2025-12-18 23:26:02 UTC+08:00
  ****************************************************/
-package host.fairy.entity.dto;
+package host.fairy.entity.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

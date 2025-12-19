@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
         UserDetailsServiceAutoConfiguration.class,
         SecurityFilterAutoConfiguration.class
 })
-public class DataCollectorBootstrapApplication {
+public class Application {
     
     public static void main(String[] args) {
-        SpringApplication.run(DataCollectorBootstrapApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
     
 }

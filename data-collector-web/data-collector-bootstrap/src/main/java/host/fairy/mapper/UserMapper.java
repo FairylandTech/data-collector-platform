@@ -18,4 +18,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
     
     UserModel findByUsername(String username);
+    
+    void insert(UserModel user);
 }

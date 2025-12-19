@@ -17,7 +17,7 @@ import lombok.ToString;
  * @version 1.0
  */
 @Data
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class UserRoleModel extends ModelBase {
     
