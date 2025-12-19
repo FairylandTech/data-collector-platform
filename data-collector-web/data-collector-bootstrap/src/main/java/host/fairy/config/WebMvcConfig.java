@@ -30,6 +30,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(this.jwtHandlerInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login", "/error");
+                .excludePathPatterns("/user/login", "/test/hello");
     }
 }

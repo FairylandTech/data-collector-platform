@@ -8,11 +8,12 @@
 package host.fairy.service;
 
 import host.fairy.entity.dto.UserLoginDTO;
+import host.fairy.entity.vo.UserLoginVO;
 
 /**
  * @author Lionel Johnson
  * @version 1.0
  */
 public interface UserLoginService {
-    String login(UserLoginDTO userLoginDTO);
+    UserLoginVO login(UserLoginDTO userLoginDTO);
 }

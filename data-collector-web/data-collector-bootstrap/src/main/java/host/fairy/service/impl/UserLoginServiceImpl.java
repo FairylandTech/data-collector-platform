@@ -8,6 +8,7 @@
 package host.fairy.service.impl;
 
 import host.fairy.entity.dto.UserLoginDTO;
+import host.fairy.entity.vo.UserLoginVO;
 import host.fairy.fairylandfuture.exception.auth.AuthenticationException;
 import host.fairy.mapper.UserMapper;
 import host.fairy.model.user.UserModel;
@@ -34,7 +35,7 @@ public class UserLoginServiceImpl implements UserLoginService {
     }
     
     @Override
-    public String login(UserLoginDTO userLoginDTO) {
+    public UserLoginVO login(UserLoginDTO userLoginDTO) {
         log.info("用户登录，用户名：{}", userLoginDTO.getUsername());
         // TOOD: 校验验证码
         
@@ -46,6 +47,8 @@ public class UserLoginServiceImpl implements UserLoginService {
             throw new AuthenticationException("用户名或密码错误");
         }
         
-        return jwtAuthService.generateToken(user);
+        String token = jwtAuthService.generateToken(user);
+        
+        return UserLoginVO.fromUserModel(user, token);
     }
 }

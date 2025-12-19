@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
  * @version 1.0
  */
 @Data
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class UserModel extends ModelBase {
     

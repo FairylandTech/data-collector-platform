@@ -7,11 +7,20 @@
  ****************************************************/
 package host.fairy.enums;
 
+import lombok.Getter;
+
 /**
  * @author Lionel Johnson
  * @version 1.0
  */
+@Getter
 public enum JWTClaimsKeyEnum {
-    USER_ID,
-    USERNAME,
+    USER_ID("userID"),
+    USERNAME("username");
+    
+    private final String name;
+    
+    JWTClaimsKeyEnum(String name) {
+        this.name = name;
+    }
 }
