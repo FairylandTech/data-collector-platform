@@ -7,10 +7,11 @@
  ****************************************************/
 package host.fairy.controller;
 
-import host.fairy.entity.dto.UserLoginDTO;
-import host.fairy.entity.vo.UserLoginVO;
+import host.fairy.entity.dto.user.UserCreateDTO;
+import host.fairy.entity.dto.user.UserLoginDTO;
+import host.fairy.entity.vo.user.UserLoginVO;
 import host.fairy.fairylandfuture.http.Response;
-import host.fairy.service.UserLoginService;
+import host.fairy.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+
 /**
  * @author Lionel Johnson
  * @version 1.0
@@ -26,19 +29,25 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-public class UserLoginController {
+public class UserController {
     
-    private final UserLoginService userLoginService;
+    private final UserService userService;
     
-    UserLoginController(UserLoginService userLoginService) {
-        this.userLoginService = userLoginService;
+    UserController(UserService userService) {
+        this.userService = userService;
     }
     
     @PostMapping("/login")
     public Response<UserLoginVO> login(@Valid @RequestBody UserLoginDTO userLoginDTO, HttpServletResponse response) {
-        UserLoginVO result = this.userLoginService.login(userLoginDTO);
+        UserLoginVO result = this.userService.login(userLoginDTO);
         response.setHeader("Authorization", result.getToken());
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
         return Response.success("登录成功", result);
+    }
+    
+    @PostMapping()
+    public Response<?> createUser(@Valid @RequestBody UserCreateDTO userCreateDTO){
+        log.info("创建用户：{}, 年龄: {}", userCreateDTO, userCreateDTO.getAge());
+        return Response.success();
     }
 }

@@ -7,13 +7,16 @@
  ****************************************************/
 package host.fairy.service;
 
-import host.fairy.entity.dto.UserLoginDTO;
-import host.fairy.entity.vo.UserLoginVO;
+import host.fairy.entity.dto.user.UserCreateDTO;
+import host.fairy.entity.dto.user.UserLoginDTO;
+import host.fairy.entity.vo.user.UserLoginVO;
 
 /**
  * @author Lionel Johnson
  * @version 1.0
  */
-public interface UserLoginService {
+public interface UserService {
     UserLoginVO login(UserLoginDTO userLoginDTO);
+    
+    void createUser(UserCreateDTO userCreateDTO);
 }

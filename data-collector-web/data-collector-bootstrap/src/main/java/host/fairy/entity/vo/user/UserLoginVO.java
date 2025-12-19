@@ -5,7 +5,7 @@
  * @organization: https://github.com/FairylandFuture
  * @datetime: 2025-12-19 11:51:37 UTC+08:00
  ****************************************************/
-package host.fairy.entity.vo;
+package host.fairy.entity.vo.user;
 
 import host.fairy.model.user.UserModel;
 import lombok.Data;

@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-@software: IntelliJ IDEA
-@author: Lionel Johnson
-@contact: https://fairy.host
-@organization: https://github.com/FairylandFuture
-@datetime: 2025-08-28 12:47:12 UTC+08:00
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="host.fairy.mapper.UserMapper">
     <!--@Table tb_user-->
@@ -33,4 +26,9 @@
         where username = #{username};
     </select>
     
+    <insert id="insert">
+        insert into tb_user (username, password, name, birthday, phone, email)
+        values (#{username}, #{password}, #{name}, #{birthday}, #{phone}, #{email});
+    </insert>
+
 </mapper>
