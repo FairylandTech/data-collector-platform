@@ -97,23 +97,37 @@ create table if not exists tb_user_role_permission_relation
     deleted       boolean  default false
 );
 
-insert into tb_user (id, username, password, name, birthday, phone, email)
-values (1, 'admin', '123456', '管理员', '2025-12-30 00:00:00', '133xxxxxxxx', 'example@example.com');
+insert into
+    tb_user (id, username, password, name, birthday, phone, email)
+values
+    (1, 'admin', '123456', '管理员', '2025-12-30 00:00:00', '133xxxxxxxx', 'example@example.com');
 
-insert into tb_user_group (id, name, description)
-values (1, '默认分组', '默认分组');
+insert into
+    tb_user_group (id, name, description)
+values
+    (1, '默认分组', '默认分组');
 
-insert into tb_user_group_relation (id, user_id, user_group_id)
-values (1, 1, 1);
+insert into
+    tb_user_group_relation (id, user_id, user_group_id)
+values
+    (1, 1, 1);
 
-insert into tb_user_role (id, name, code, description)
-values (1, '系统管理员', 'system:admin', '系统管理员');
+insert into
+    tb_user_role (id, name, code, description)
+values
+    (1, '系统管理员', 'system:admin', '系统管理员');
 
-insert into tb_user_role_relation (id, user_id, role_id)
-values (1, 1, 1);
+insert into
+    tb_user_role_relation (id, user_id, role_id)
+values
+    (1, 1, 1);
 
-insert into tb_user_permission (id, code, name, description, parent_id)
-values (1, 'system:admin', '系统管理', '系统管理员', 0);
+insert into
+    tb_user_permission (id, code, name, description, parent_id)
+values
+    (1, 'system:admin', '系统管理', '系统管理员', 0);
 
-insert into tb_user_role_permission_relation (id, rule_id, permission_id)
-values (1, 1, 1);
+insert into
+    tb_user_role_permission_relation (id, rule_id, permission_id)
+values
+    (1, 1, 1);

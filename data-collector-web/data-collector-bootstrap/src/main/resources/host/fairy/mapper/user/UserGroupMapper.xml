@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="host.fairy.mapper.user.UserGroupMapper">
-    <!--@Table tb_user_group -->
+    <!--@Table
+    tb_user_group -->
 
     <resultMap id="BaseResultMap" type="host.fairy.model.user.GroupModel" autoMapping="true">
         <id property="id" column="id" jdbcType="INTEGER"/>
@@ -12,11 +13,14 @@
         <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
         <result property="deleted" column="deleted" jdbcType="BOOLEAN"/>
     </resultMap>
-    
+
     <select id="selectGroupIdsByUserId" resultType="java.lang.Long">
-        select user_group_id
-        from tb_user_group_relation
-        where user_id = #{userId}
+        select
+            user_group_id
+        from
+            tb_user_group_relation
+        where
+            user_id = #{userId}
     </select>
 
 </mapper>

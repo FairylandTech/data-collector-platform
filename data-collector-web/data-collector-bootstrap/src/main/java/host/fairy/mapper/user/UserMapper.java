@@ -7,8 +7,11 @@
  ****************************************************/
 package host.fairy.mapper.user;
 
+import host.fairy.entity.mo.user.UserQueryMO;
 import host.fairy.model.user.UserModel;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author Lionel Johnson
@@ -16,10 +19,15 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper {
+    Integer insert(UserModel user);
     
-    UserModel selectUserByUsername(String username);
+    Integer update(UserModel user);
+    
+    Integer deleteById(Long id);
+    
+    List<UserModel> select(UserQueryMO user);
     
     UserModel selectUserById(Long id);
     
-    void insert(UserModel user);
+    UserModel selectUserByUsername(String username);
 }
