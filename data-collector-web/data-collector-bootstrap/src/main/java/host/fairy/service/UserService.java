@@ -11,6 +11,7 @@ import host.fairy.entity.dto.user.UserCreateDTO;
 import host.fairy.entity.dto.user.UserLoginDTO;
 import host.fairy.entity.dto.user.UserQueryDTO;
 import host.fairy.entity.vo.user.UserInfoVO;
+import host.fairy.entity.vo.user.UserListVO;
 import host.fairy.entity.vo.user.UserLoginVO;
 import host.fairy.fairylandfuture.common.web.response.PaginationResponse;
 import host.fairy.model.user.UserModel;
@@ -26,5 +27,5 @@ public interface UserService {
     
     UserInfoVO getUserById(Long userId);
     
-    PaginationResponse<UserModel> getUserList(UserQueryDTO userQueryDTO);
+    PaginationResponse<UserListVO> getUserList(UserQueryDTO userQueryDTO);
 }

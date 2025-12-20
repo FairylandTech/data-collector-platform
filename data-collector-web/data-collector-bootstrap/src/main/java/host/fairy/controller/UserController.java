@@ -11,6 +11,7 @@ import host.fairy.entity.dto.user.UserCreateDTO;
 import host.fairy.entity.dto.user.UserLoginDTO;
 import host.fairy.entity.dto.user.UserQueryDTO;
 import host.fairy.entity.vo.user.UserInfoVO;
+import host.fairy.entity.vo.user.UserListVO;
 import host.fairy.entity.vo.user.UserLoginVO;
 import host.fairy.fairylandfuture.common.web.response.PaginationResponse;
 import host.fairy.fairylandfuture.common.web.response.Response;
@@ -45,7 +46,7 @@ public class UserController {
     }
     
     @GetMapping("")
-    public Response<PaginationResponse<UserModel>> getUserList(UserQueryDTO userQueryDTO) {
+    public Response<PaginationResponse<UserListVO>> getUserList(UserQueryDTO userQueryDTO) {
         log.debug("获取用户列表");
         return Response.success(this.userService.getUserList(userQueryDTO));
     }

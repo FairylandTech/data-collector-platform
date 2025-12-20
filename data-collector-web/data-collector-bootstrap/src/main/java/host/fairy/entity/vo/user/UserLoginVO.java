@@ -8,7 +8,9 @@
 package host.fairy.entity.vo.user;
 
 import host.fairy.model.user.UserModel;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Lionel Johnson
