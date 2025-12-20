@@ -131,3 +131,12 @@ insert into
     tb_user_role_permission_relation (id, rule_id, permission_id)
 values
     (1, 1, 1);
+
+
+-- 添加测试用户
+insert into
+    tb_user (username, password, name, gender, birthday, phone, email)
+values
+    ('test001', '123456', '测试用户1', 'male', '1990-01-15', '13800138001', 'test001@example.com'),
+    ('test002', '123456', '测试用户2', 'female', '1992-05-20', '13800138002', 'test002@example.com'),
+    ('test003', '123456', '测试用户3', 'unknown', '1988-08-08', '13800138003', 'test003@example.com');

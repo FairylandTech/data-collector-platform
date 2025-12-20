@@ -7,8 +7,8 @@
  ****************************************************/
 package host.fairy.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import host.fairy.entity.dto.user.UserCreateDTO;
 import host.fairy.entity.dto.user.UserLoginDTO;
 import host.fairy.entity.dto.user.UserQueryDTO;
@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Lionel Johnson
@@ -53,29 +54,16 @@ public class UserServiceImpl implements UserService {
         this.jwtAuthService = jwtAuthService;
     }
     
-    public static <E> Page<E> convertToPage(List<E> list) {
-        return (Page<E>) list;
-    }
-    
-    public static <E> PaginationResponse<E> fromPageHepler(List<E> list) {
-        Page<E> page = convertToPage(list);
+    public static <R, T> PaginationResponse<T> fromPageHepler(List<T> list, List<R> source) {
+        PageInfo<T> page = new PageInfo<>(list);
+        PageInfo<R> sourcePageInfo = new PageInfo<>(source);
         
-        if (page == null) {
-            return PaginationResponse.<E>builder()
-                    .data(Collections.emptyList())
-                    .page(0)
-                    .size(0)
-                    .total(0)
-                    .totalPages(0)
-                    .build();
-        }
-        
-        return PaginationResponse.<E>builder()
-                .data(page.getResult() != null ? page.getResult() : Collections.emptyList())
-                .page(page.getPageNum())
-                .size(page.getPageSize())
-                .total(page.getTotal())
-                .totalPages(page.getPages())
+        return PaginationResponse.<T>builder()
+                .data(page.getList() != null ? page.getList() : Collections.emptyList())
+                .page(sourcePageInfo.getPageNum())
+                .size(sourcePageInfo.getPageSize())
+                .total(sourcePageInfo.getTotal())
+                .totalPages(sourcePageInfo.getPages())
                 .build();
     }
     
@@ -93,7 +81,9 @@ public class UserServiceImpl implements UserService {
             throw new AuthenticationException("用户名或密码错误");
         }
         
+        log.info("用户登录成功，用户名：{}", userLoginDTO.getUsername());
         String token = jwtAuthService.generateToken(user);
+        log.info("生成JWT Token：{}", token);
         
         return UserLoginVO.fromUserModel(user, token);
     }
@@ -110,7 +100,7 @@ public class UserServiceImpl implements UserService {
         }
         // TODO: 密码加密存储
         
-        // 创建用户
+        log.debug("转换UserCreateDTO为UserModel：{}", userCreateDTO.toUserModel());
         userMapper.insert(userCreateDTO.toUserModel());
         // 和用户组关联
         
@@ -121,25 +111,33 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public UserInfoVO getUserById(Long userId) {
+        log.debug("根据用户ID获取用户信息，用户ID：{}", userId);
         UserModel user = this.userMapper.selectUserById(userId);
-        if (user == null) {
-            log.error("用户不存在，用户ID：{}", userId);
-            throw new BusinessException("用户不存在");
-        }
+        log.debug("查询到的用户信息：{}", user);
+        Objects.requireNonNull(user, "用户不存在");
+        
         List<Long> userGroupIds = this.userGroupMapper.selectGroupIdsByUserId(userId);
+        log.debug("查询用户所属的用户组: {}", userGroupIds);
+        
         List<Long> userRoleIds = this.userRoleMapper.selectRoleIdsByUserId(userId);
+        log.debug("查询用户所属的角色: {}", userRoleIds);
+        
         return UserInfoVO.fromModel(user, userGroupIds, userRoleIds);
     }
     
     public PaginationResponse<UserListVO> getUserList(UserQueryDTO userQueryDTO) {
         log.debug("查询用户列表，查询条件：{}", userQueryDTO);
+        
         PageHelper.startPage(userQueryDTO.getPage(), userQueryDTO.getSize());
         log.debug("分页参数设置，页码：{}，每页大小：{}", userQueryDTO.getPage(), userQueryDTO.getSize());
+        
         log.debug("转换查询条件为MO对象：{}", userQueryDTO.toMO());
         List<UserModel> users = this.userMapper.select(userQueryDTO.toMO());
         log.debug("查询到的用户列表：{}", users);
+        
         List<UserListVO> userListVOList = users.stream().map(UserListVO::fromModel).toList();
         log.debug("转换为UserListVO列表：{}", userListVOList);
-        return fromPageHepler(userListVOList);
+        
+        return fromPageHepler(userListVOList, users);
     }
 }
