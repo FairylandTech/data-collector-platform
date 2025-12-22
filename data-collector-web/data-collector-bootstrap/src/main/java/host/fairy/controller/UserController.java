@@ -10,12 +10,12 @@ package host.fairy.controller;
 import host.fairy.entity.dto.user.UserCreateDTO;
 import host.fairy.entity.dto.user.UserLoginDTO;
 import host.fairy.entity.dto.user.UserQueryDTO;
+import host.fairy.entity.dto.user.UserUpdateDTO;
 import host.fairy.entity.vo.user.UserInfoVO;
 import host.fairy.entity.vo.user.UserListVO;
 import host.fairy.entity.vo.user.UserLoginVO;
 import host.fairy.fairylandfuture.common.web.response.PaginationResponse;
 import host.fairy.fairylandfuture.common.web.response.Response;
-import host.fairy.model.user.UserModel;
 import host.fairy.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -45,20 +45,27 @@ public class UserController {
         return Response.success("登录成功", result);
     }
     
-    @GetMapping("")
+    @PostMapping
+    public Response<?> createUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
+        log.info("创建用户: {}", userCreateDTO.getUsername());
+        return Response.success();
+    }
+    
+    @GetMapping
     public Response<PaginationResponse<UserListVO>> getUserList(UserQueryDTO userQueryDTO) {
-        log.debug("获取用户列表");
+        log.info("获取用户列表，查询条件：{}", userQueryDTO);
         return Response.success(this.userService.getUserList(userQueryDTO));
     }
     
-    @PostMapping()
-    public Response<?> createUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
-        log.debug("创建用户：{}, 年龄: {}", userCreateDTO, userCreateDTO.getAge());
+    @PutMapping("/{userId}")
+    public Response<?> updateUser(@PathVariable Long userId, @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
+        log.info("更新用户信息，用户ID：{}", userId);
+        this.userService.updateUser(userId, userUpdateDTO);
         return Response.success();
     }
     
     @GetMapping("/{userId}")
-    public Response<UserInfoVO> getProfile(@PathVariable Long userId) {
+    public Response<UserInfoVO> getUserInfo(@PathVariable Long userId) {
         log.debug("获取用户信息，用户ID：{}", userId);
         return Response.success(this.userService.getUserById(userId));
     }

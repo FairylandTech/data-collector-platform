@@ -10,11 +10,13 @@ package host.fairy.service;
 import host.fairy.entity.dto.user.UserCreateDTO;
 import host.fairy.entity.dto.user.UserLoginDTO;
 import host.fairy.entity.dto.user.UserQueryDTO;
+import host.fairy.entity.dto.user.UserUpdateDTO;
 import host.fairy.entity.vo.user.UserInfoVO;
 import host.fairy.entity.vo.user.UserListVO;
 import host.fairy.entity.vo.user.UserLoginVO;
 import host.fairy.fairylandfuture.common.web.response.PaginationResponse;
 import host.fairy.model.user.UserModel;
+import jakarta.validation.Valid;
 
 /**
  * @author Lionel Johnson
@@ -28,4 +30,6 @@ public interface UserService {
     UserInfoVO getUserById(Long userId);
     
     PaginationResponse<UserListVO> getUserList(UserQueryDTO userQueryDTO);
+    
+    void updateUser(Long userId, @Valid UserUpdateDTO userUpdateDTO);
 }

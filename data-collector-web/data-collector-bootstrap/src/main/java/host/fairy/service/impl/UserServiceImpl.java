@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import host.fairy.entity.dto.user.UserCreateDTO;
 import host.fairy.entity.dto.user.UserLoginDTO;
 import host.fairy.entity.dto.user.UserQueryDTO;
+import host.fairy.entity.dto.user.UserUpdateDTO;
 import host.fairy.entity.vo.user.UserInfoVO;
 import host.fairy.entity.vo.user.UserListVO;
 import host.fairy.entity.vo.user.UserLoginVO;
@@ -139,5 +140,13 @@ public class UserServiceImpl implements UserService {
         log.debug("转换为UserListVO列表：{}", userListVOList);
         
         return fromPageHepler(userListVOList, users);
+    }
+    
+    @Override
+    public void updateUser(Long userId, UserUpdateDTO userUpdateDTO) {
+        log.debug("更新用户信息，用户ID：{}，用户信息：{}", userId, userUpdateDTO);
+        
+        log.debug("转换UserUpdateDTO为UserModel：{}", userUpdateDTO.toUserModel());
+        this.userMapper.update(userId, userUpdateDTO.toUserModel());
     }
 }

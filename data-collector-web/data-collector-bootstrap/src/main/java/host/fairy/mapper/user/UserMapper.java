@@ -10,6 +10,7 @@ package host.fairy.mapper.user;
 import host.fairy.entity.mo.user.UserQueryMO;
 import host.fairy.model.user.UserModel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ import java.util.List;
 public interface UserMapper {
     Integer insert(UserModel user);
     
-    Integer update(UserModel user);
+    Integer update(@Param("id") Long userId, @Param("user") UserModel user);
     
     Integer deleteById(Long id);
     
